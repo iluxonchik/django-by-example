@@ -63,3 +63,4 @@ target/
 
 # Project-Specific
 *.sqlite3
+*.swp
