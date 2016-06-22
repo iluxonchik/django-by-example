@@ -4,6 +4,7 @@ from .models import Post, Comment
 from .forms import EmailPostForm, CommentForm
 from django.views.generic import ListView
 from django.core.mail import send_mail
+from taggit.models import Tag
 
 class PostListView(ListView):
     queryset = Post.published.all()
@@ -11,8 +12,14 @@ class PostListView(ListView):
     paginate_by = 3 # page object is passed to view as "page_obj"
     template_name = 'blog/post/list.html'
 
-def post_list(request):
+def post_list(request, tag_slug=None):
     object_list = Post.published.all()
+
+    tag = None
+    if tag_slug:
+        tag = get_object_or_404(Tag, slug=tag_slug)
+        object_list = object_list.filter(tags__in=[tag])
+
     paginator = Paginator(object_list, 3) # 3 posts per page
     page = request.GET.get('page')
     try:
@@ -27,6 +34,7 @@ def post_list(request):
         {
             'posts':posts, # page to be displayed object 
             'page':page,
+            'tag': tag,
         })
     
 def post_detail(request, year, month, day, post):
