@@ -37,19 +37,20 @@ def post_detail(request, year, month, day, post):
 def post_share(request, post_id):
     # Retrieve post by id
     post = get_object_or_404(Post, id=post_id, status='published')
-
+    cd = None
+    sent = False
     if request.method == "POST":
         # The form was submitted
         form = EmailPostForm(request.POST)
-        sent = False
         if form.is_valid():
             cd = form.cleaned_data
-            post_url = request.build_absolute_uri(post.get_absolut_url())
+            post_url = request.build_absolute_uri(post.get_absolute_url())
             subject = '{} ({}) recommends you reading "{}"'.format(cd['name'], cd['email'], post.title)
-            message = 'Read "{}" at {}\n\n{}\'s comments: {}'.format(post.title, post.url, cd['name'], cd['comments'])
+            message = 'Read "{}" at {}\n\n{}\'s comments: {}'.format(post.title, post_url, cd['name'], cd['comments'])
+            # NOTE: if using Gmail, it will rewrite the From and Reply-To headers
             send_mail(subject, message, 'admin@myblog.com', [cd['to']])
             sent = True
     else:
         # Form was not submitted, so let's just display it
         form = EmailPostForm()
-        return render(request, 'blog/post/share.html', {'post': post, 'form': form, sent: 'sent'})
+    return render(request, 'blog/post/share.html', {'post': post, 'form': form, 'sent': sent, 'cd':cd})

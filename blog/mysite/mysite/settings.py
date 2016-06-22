@@ -121,7 +121,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-# email cofiguration (this onee's for Gmail)
+# email cofiguration (this onee's for gmail)
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'email@gmail.com'
 EMAIL_HOST_PASSWORD = 'password'
