@@ -27,6 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# for sitemap
+SITE_ID = 1
 
 # Application definition
 
@@ -39,6 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blog',
     'taggit',
+    'django.contrib.sites',     #  allows to associate objects to a particualr site running with the project
+    'django.contrib.sitemaps',
 ]
 
 MIDDLEWARE_CLASSES = [
