@@ -11,6 +11,11 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
+from django.core.urlresolvers import reverse_lazy # llke reverse(), but can be used before the project's URL configuration is loaded
+
+LOGIN_REDIRECT_URL = reverse_lazy('dashboard') # where to redirect after the user has logged in
+LOGIN_URL = reverse_lazy('login') # to which url the user should be redirected to login
+LOGOUT_URL = reverse_lazy('logout')
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

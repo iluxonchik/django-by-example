@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login
 from .forms import LoginForm
+from django.contrib.auth.decorators import login_required
 
 def user_login(request):
     if request.method == 'POST':
@@ -21,4 +22,11 @@ def user_login(request):
         form = LoginForm()
     return render(request, 'account/login.html', {'form': form})
 
-
+# The login_required decorator checks if the user is logged in: if yes, it executed the view
+# if no, redirects the user to the login URL, passing the URL he was trying to access in the 'next'
+# GET parameter
+@login_required
+def dashboard(request):
+    # section is used to track wich section of the website the user is watching
+    # multiple views can correspond to the same section
+    return render(request, 'account/dashboard.html', {'section':'dashboard'})
