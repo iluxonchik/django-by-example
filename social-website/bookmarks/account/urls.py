@@ -11,5 +11,7 @@ urlpatterns = [
     url(r'^logout/$', 'django.contrib.auth.views.logout', name='logout'),
     # logout-then-login does not need a template, since it performs a redirect to the login view
     url(r'^logut-then-login/$', 'django.contrib.auth.views.logout_then_login', name='logout_then_login'),
-    url(r'^dahsboard/$', views.dashboard, name='dashboard') 
+    url(r'^dahsboard/$', views.dashboard, name='dashboard'),
+    url(r'^password-change/$', 'django.contrib.auth.views.password_change', name='password_change'),
+    url(r'^password-change/done/$', 'django.contrib.auth.views.password_change_done', name='password_change_done'),
 ]
