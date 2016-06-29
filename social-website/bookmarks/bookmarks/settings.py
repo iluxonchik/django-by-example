@@ -77,6 +77,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'social.apps.django_app.default',
+    'sorl.thumbnail',
 ]
 
 MIDDLEWARE_CLASSES = [
