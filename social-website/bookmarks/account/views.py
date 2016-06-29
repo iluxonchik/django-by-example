@@ -1,10 +1,11 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from .forms import LoginForm, UserRegistrationForm, UserEditForm, ProfileEditForm
 from django.contrib.auth.decorators import login_required
 from .models import Profile
 from django.contrib import messages
+from django.conf import settings
 
 def user_login(request):
     if request.method == 'POST':
@@ -65,3 +66,9 @@ def edit(request):
         user_form = UserEditForm(instance=request.user)
         profile_form = ProfileEditForm(instance=request.user.profile)
     return render(request, 'account/edit.html', {'user_form':user_form, 'profile_form':profile_form})
+
+@login_required
+def social_auth_new_user(request):
+    user = request.user
+    Profile.objcets.create(user=user)
+
