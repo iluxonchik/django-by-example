@@ -28,8 +28,14 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
-    'account.authentication.EmailAuthBackend'
+    'account.authentication.EmailAuthBackend',
+    'social.backends.facebook.Facebook2OAuth2',
 ) # order matters
+
+# python-social-auth settings for Facebook authentication
+SOCIAL_AUTH_FACEBOOK_KEY = os.environ['FB_APP_ID']
+SOCIAL_AUTH_FACEBOOK_SECRET = os.environ['FB_APP_SECRET']
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
@@ -53,6 +59,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'social.apps.django_app.default',
 ]
 
 MIDDLEWARE_CLASSES = [
