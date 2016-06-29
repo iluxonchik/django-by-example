@@ -71,4 +71,3 @@ def edit(request):
 def social_auth_new_user(request):
     user = request.user
     Profile.objcets.create(user=user)
-
