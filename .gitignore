@@ -64,4 +64,4 @@ target/
 # Project-Specific
 *.sqlite3
 *.swp
-social-website/bookmarks/media/cache/
+social-website/bookmarks/media/

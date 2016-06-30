@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Bookmarked images{% endblock title %}
+
+{% block content %}
+    <h1>Bookmarked images</h1>
+    <div id="image-list">
+        {% include "images/image/list_ajax.html" %}
+    </div>
+{% endblock content %}
+
+{% block domready %}
+    var page = 1;
+    var empty_page = false;
+    var block_request = false;
+    
+    function load_images() {
+        var margin = $(document).height() - $(window).height() - 200;
+        if ($(window).scrollTop() > margin && empty_page == false && block_request == false) {
+            block_request = true; // don't make any new AJAX request, while there's an active one
+            page += 1;
+            $.get('?page=' + page, function(data) {
+                if(data == '') {
+                    empty_page = true;
+                } else {
+                    block_request = false;
+                    $('#image-list').append(data);
+                }
+            });
+        }
+    }
+    
+    /*
+        Image loading "hack": image-list id does not limit the width/height, which means if the resolution
+        is hight enough, there will be no scroll bar, therefore no scroll event, so at most 8 images will be loaded.
+        The timer forces the check every second to get arround that problem.
+    */
+
+    function handle_timeout() {
+        load_images();
+        window.setTimeout(handle_timeout, 1000);
+    }
+    
+    window.setTimeout(handle_timeout, 1000);
+
+    $(window).scroll(load_images);
+{% endblock domready %}

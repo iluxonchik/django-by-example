@@ -3,9 +3,10 @@ from django.contrib import messages
 from .forms import ImageCreateForm
 from django.contrib.auth.decorators import login_required
 from .models import Image
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.views.decorators.http import require_POST
 from common.decorators import ajax_required
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 @login_required
 def image_create(request):
@@ -49,3 +50,36 @@ def image_like(request):
         except:
             pass
     return JsonResponse({'status':'ko'})
+
+def image_list(request):
+    """
+    View that takes care of displaying the image list. The same view is used to handle
+    AJAX and non-AJAX requests, each one using a different template.
+    """
+    images = Image.objects.all()
+    paginator = Paginator(images, 8)
+    page = request.GET.get('page')
+    try:
+        images = paginator.page(page)
+    except PageNotAnInteger:
+         images = paginator.page(1)
+    except EmptyPage:
+        if request.is_ajax():
+            # The the request is AJAX and the page is out of range, return an empty page,
+            # this will prevent the AJAX request from appending more content to the page
+            return HttpResponse('')
+        # If page is out of range, but the request is not AJAX, deliver the last page
+        images = paginator.page(paginator.num_pages)
+    if request.is_ajax():
+        return render(request, 
+            'images/image/list_ajax.html',  # tempalte that handles AJAX requests for image list
+            {
+                'section': 'images',
+                'images': images,
+            })
+    return render(request,
+        'images/image/list.html',  # tempalte that handles non-AJAX reqeuests for image list
+        {
+            'section': 'images', 
+            'images': images,
+        })
