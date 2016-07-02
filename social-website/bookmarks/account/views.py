@@ -43,7 +43,9 @@ def dashboard(request):
 
     if following_ids:
         # User is following someone, so let's only display their actions
-        actions = actions.filter(user__id__in=following_ids)
+        # besides selecting the actions relation, also get the User from each action and Profile for each User
+        # (a JOIN will be performed)
+        actions = actions.filter(user__id__in=following_ids).select_related('user', 'user__profile').prefetch_related('target')
         actions = actions[:10]
     # section is used to track wich section of the website the user is watching
     # multiple views can correspond to the same section
@@ -59,7 +61,7 @@ def register(request):
             new_user.save()
             # '.create()' is a convinience method for creating an object and saving it in one step
             profile = Profile.objects.create(user=new_user) # create the user Profile
-            create_action(request.user, 'has created an account')
+            create_action(new_user, 'has created an account')
             # NOTE: this will render the template wihtout redirecting the user to 'account/register_done.html' URL
             return render(request, 'account/register_done.html', {'user':new_user})
     else:
@@ -109,7 +111,7 @@ def user_follow(request):
             user = User.objects.get(id=user_id)
             if action == 'follow':
                 Contact.objects.get_or_create(user_from=request.user, user_to=user)
-                create_aciton(requet.user, 'is now following', user)
+                create_action(request.user, 'is now following', user)
             else:
                 Contact.objects.filter(user_from=request.user, user_to=user).delete()
             return JsonResponse({'status':'ok'})
