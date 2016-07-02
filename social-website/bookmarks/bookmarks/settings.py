@@ -33,8 +33,8 @@ AUTHENTICATION_BACKENDS = (
 ) # order matters
 
 # python-social-auth settings for Facebook authentication
-SOCIAL_AUTH_FACEBOOK_KEY = os.environ['FB_APP_ID']
-SOCIAL_AUTH_FACEBOOK_SECRET = os.environ['FB_APP_SECRET']
+SOCIAL_AUTH_FACEBOOK_KEY = os.environ.get('FB_APP_ID')
+SOCIAL_AUTH_FACEBOOK_SECRET = os.environ.get('FB_APP_SECRET')
 SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
 SOCIAL_AUTH_PIPELINE = (
     'social.pipeline.social_auth.social_details',
@@ -78,6 +78,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'account',
     'images',
+    'actions',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
