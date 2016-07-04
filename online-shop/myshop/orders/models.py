@@ -10,6 +10,7 @@ class Order(models.Model):
     city = models.CharField(max_length=100)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    paid = models.BooleanField(default=False)
 
     class Meta:
         ordering = ('-created', )
@@ -31,4 +32,3 @@ class OrderItem(models.Model):
 
     def get_cost(self):
         return self.price * self.quantity
-
