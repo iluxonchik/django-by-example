@@ -11,7 +11,7 @@ class Category(models.Model):
         verbose_name_plural = 'categories'
     
     def get_absolute_url(self):
-        return reverse('product_list_by_category', args=[self.slug])
+        return reverse('shop:product_list_by_category', args=[self.slug])
 
     def __str__(self):
         return self.name
@@ -35,7 +35,7 @@ class Product(models.Model):
         index_together = (('id', 'slug'), )
 
     def get_absolute_url(self):
-        return reverse('product_detail', args=[self.id, self.slug])
+        return reverse('shop:product_detail', args=[self.id, self.slug])
 
     def __str__(self):
         return self.name

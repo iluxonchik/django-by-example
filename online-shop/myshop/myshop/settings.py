@@ -25,6 +25,9 @@ SECRET_KEY = 'g6v2=1h@8ay*zr^$wx^n7^g_w+b5s(!fkb2n3v2-0*9k+zr^gs'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+MEDIA_URL = '/media/'  # URL taht serves media files upoloaded by users
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')  # local path where the files will reside
+
 ALLOWED_HOSTS = []
 
 

@@ -65,3 +65,6 @@ target/
 *.sqlite3
 *.swp
 social-website/bookmarks/media/
+
+# Project-Specific
+online-shop/myshop/media/
