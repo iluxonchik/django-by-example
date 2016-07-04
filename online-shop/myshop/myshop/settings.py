@@ -28,6 +28,9 @@ DEBUG = True
 MEDIA_URL = '/media/'  # URL taht serves media files upoloaded by users
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')  # local path where the files will reside
 
+# Session settings
+CART_SESSION_ID = 'cart'
+
 ALLOWED_HOSTS = []
 
 
@@ -41,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'shop',
+    'cart',
 ]
 
 MIDDLEWARE_CLASSES = [
