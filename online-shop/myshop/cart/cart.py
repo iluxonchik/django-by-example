@@ -12,9 +12,9 @@ class Cart(object):
         if not cart:
             # save an empty cart in the session
             cart = self.session[settings.CART_SESSION_ID] = {}  # product_id: {quanity, price} --> gurantees that the same product isn't added more than once
-        self.cart = carts
+        self.cart = cart
 
-    def add(self, product, quanitity, update_quantity=False):
+    def add(self, product, quantity, update_quantity=False):
         product_id = str(product.id)  # we're using JSON to serialize the session data and it only allows string keys
         if product_id not in self.cart:
             self.cart[product_id] = {'quantity': 0, 'price': str(product.price)}  # product.price converted to string in order to serialize it
