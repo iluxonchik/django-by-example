@@ -33,6 +33,12 @@ CART_SESSION_ID = 'cart'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
+
+# Braintree Sandbox
+BRAINTREE_MERCHANT_ID = 'XXX'
+BRAINTREE_PUBLIC_KEY = 'XXX'
+BRAINTREE_PRIVATE_KEY = 'XXX'
+
 ALLOWED_HOSTS = []
 
 
@@ -48,6 +54,7 @@ INSTALLED_APPS = [
     'shop',
     'cart',
     'orders',
+    'payments',
 ]
 
 MIDDLEWARE_CLASSES = [

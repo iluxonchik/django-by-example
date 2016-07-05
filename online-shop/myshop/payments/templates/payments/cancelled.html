@@ -1,0 +1,10 @@
+{% extends "shop/base.html" %}
+
+{% block title %}Payment Cancelled{% endblock title %}
+
+{% block content %}
+<p> There was an error processing your order </p>
+{% if message %}
+    <p>{{ message }}</p>
+{% endif %}
+{% endblock content %}

@@ -1,0 +1,20 @@
+{% extends "shop/base.html" %}
+
+{% block title %}Pay using Braintree{% endblock title %}
+
+{% block content %}
+<form id="checkout" method="post" action=".">
+  <div id="payment-form"></div>
+  <input type="submit" value="Pay ${{ amount }}">
+  {% csrf_token %}
+</form>
+
+<script src="https://js.braintreegateway.com/js/braintree-2.26.0.min.js"></script>
+<script>
+var clientToken =  "{{ client_token }}";
+
+braintree.setup(clientToken, "dropin", {
+  container: "payment-form"
+});
+</script>
+{% endblock content %}
