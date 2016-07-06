@@ -25,7 +25,7 @@ def order_create(request):
             # launch asynchronous task
             order_created.delay(order.id)
             request.session['order_id'] = order.id  # store order id in session, so that it can be used in payment (to get the order price)
-            return redirect(reverse('payment:process'))
+            return redirect(reverse('payments:process'))
     else:
         form = OrderCreateForm()
     return render(request, 'orders/order/create.html', {'cart':cart, 'form':form})

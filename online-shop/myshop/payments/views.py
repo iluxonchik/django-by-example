@@ -1,9 +1,16 @@
+import weasyprint
+from io import BytesIO
 from django.shortcuts import render, redirect, get_object_or_404
 from django.core.urlresolvers import reverse
 from django.conf import settings
 from orders.models import Order
 from decimal import Decimal
 from django.utils.safestring import mark_safe
+from django.template.loader import render_to_string
+from django.core.mail import EmailMessage
+from django.conf import settings
+
+
 
 import braintree
 braintree.Configuration.configure(braintree.Environment.Sandbox, 
@@ -33,6 +40,20 @@ def payment_process(request):
 
         if result.is_success:
             # all good, redirect to success page
+            order.paid = True
+            order.save()
+            # create invoice e-mail
+            # A better approach would be to launch an async task with celery
+            subject = 'My shop - Invoice no. {}'.format(order.id)
+            message = 'Plase, find attached the invoice for your recent purchase.'
+            email = EmailMessage(subject, message, 'admin@myshop.com', [order.email])
+            # generate pdf
+            html = render_to_string('orders/order/pdf.html', {'order':order})
+            out = BytesIO()
+            weasyprint.HTML(string=html).write_pdf(out, stylesheets=[weasyprint.CSS(settings.STATIC_ROOT + 'css/pdf.css')])
+            # attach PDF file
+            email.attach('order_{}.pdf'.format(order.id), out.getvalue(), 'application/pdf')
+            email.send()
             return redirect('payments:done')
         else:
             # something went wrong, build the error message and redirect
