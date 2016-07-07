@@ -42,6 +42,18 @@ BRAINTREE_PRIVATE_KEY = 'XXX'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
+# Django-Parler settings
+PARLER_LANGUAGES = {
+    None: (
+        {'code':'en',},
+        {'code':'pt',},
+    ),
+    'default': {
+        'fallback': 'en',
+        'hide_untranslated': False,  # don't hide untranslated content
+    }
+}
+
 ALLOWED_HOSTS = []
 
 
@@ -60,6 +72,7 @@ INSTALLED_APPS = [
     'payments',
     'coupons',
     'rosetta',
+    'parler',
 ]
 
 MIDDLEWARE_CLASSES = [
