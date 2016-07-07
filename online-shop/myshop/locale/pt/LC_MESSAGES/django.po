@@ -8,15 +8,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-07 12:11+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2016-07-07 14:40+0100\n"
+"PO-Revision-Date: 2016-07-07 13:53+0000\n"
+"Last-Translator: b'  <root@localhost.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Translated-Using: django-rosetta 0.7.11\n"
 
 #: cart/forms.py:7
 msgid "Quantity"
@@ -33,6 +34,24 @@ msgstr "Inglês"
 #: myshop/settings.py:136
 msgid "Portuguese"
 msgstr "Português"
+
+#: myshop/urls.py:23
+msgid "^cart/"
+msgstr "^carrinho/"
+
+#: myshop/urls.py:24
+msgid "^orders/"
+msgstr "^encomendas/"
+
+#: myshop/urls.py:25
+#| msgid "^payments/)"
+msgid "^payments/"
+msgstr "^pagamentos/"
+
+#: myshop/urls.py:26
+#| msgid "Coupon"
+msgid "^coupons/"
+msgstr "Cupão"
 
 #: orders/models.py:9
 msgid "first_name"
@@ -86,6 +105,22 @@ msgstr "Total"
 msgid "Place order"
 msgstr "Colocar pedido"
 
+#: orders/urls.py:6
+msgid "^create/$"
+msgstr "^criar/$"
+
+#: payments/urls.py:6
+msgid "^done/$"
+msgstr "^feito/$"
+
+#: payments/urls.py:7
+msgid "^cancelled/$"
+msgstr "^cancelado/$"
+
+#: payments/urls.py:8
+msgid "^process/$"
+msgstr "^processar/$"
+
 #: shop/templates/shop/base.html:13
 msgid "My Shop"
 msgstr "Minha Loja"
@@ -98,13 +133,11 @@ msgstr "O seu carrinho:"
 #, python-format
 msgid ""
 "\n"
-"                        %(total_items)s item%(total_items_plural)s, $"
-"%(total_price)s\n"
+"                        %(total_items)s item%(total_items_plural)s, $%(total_price)s\n"
 "                    "
 msgstr ""
 "\n"
-"                        %(total_items)s iten%(total_items_plural)s, $"
-"%(total_price)s\n"
+"                        %(total_items)s iten%(total_items_plural)s, $%(total_price)s\n"
 "                    "
 
 #: shop/templates/shop/base.html:32

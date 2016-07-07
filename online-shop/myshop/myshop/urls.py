@@ -15,13 +15,15 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from django.conf.urls.i18n import i18n_patterns
+from django.utils.translation import gettext_lazy as _
 
-urlpatterns = [
+urlpatterns = i18n_patterns(
     url(r'^admin/', admin.site.urls),
-    url(r'^cart/', include('cart.urls', namespace='cart')),
-    url(r'^orders/', include('orders.urls', namespace='orders')),
-    url(r'^payments/', include('payments.urls', namespace='payments')),
-    url(r'^coupons/', include('coupons.urls', namespace='coupons')), 
+    url(_(r'^cart/'), include('cart.urls', namespace='cart')),
+    url(_(r'^orders/'), include('orders.urls', namespace='orders')),
+    url(_(r'^payments/'), include('payments.urls', namespace='payments')),
+    url(_(r'^coupons/'), include('coupons.urls', namespace='coupons')), 
     url(r'^rosetta/', include('rosetta.urls')), 
     url(r'^', include('shop.urls', namespace='shop')),
-]
+)
