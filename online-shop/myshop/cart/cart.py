@@ -1,6 +1,7 @@
 from decimal import Decimal
 from django.conf import settings
 from shop.models import Product
+from coupons.models import Coupon
 
 class Cart(object):
     def __init__(self, request):
@@ -13,6 +14,21 @@ class Cart(object):
             # save an empty cart in the session
             cart = self.session[settings.CART_SESSION_ID] = {}  # product_id: {quanity, price} --> gurantees that the same product isn't added more than once
         self.cart = cart
+        self.__coupon_id = self.session.get('coupon_id')
+
+    @property
+    def coupon(self):
+        if self.__coupon_id:
+            return Coupon.objects.get(id=self.__coupon_id)
+        return None
+
+    def get_discount(self):
+        if self.__coupon_id:
+            return (self.coupon.discount / Decimal('100') * self.get_total_price())
+        return Decimal('0')
+
+    def get_total_price_after_discount(self):
+        return self.get_total_price() - self.get_discount()
 
     def add(self, product, quantity, update_quantity=False):
         product_id = str(product.id)  # we're using JSON to serialize the session data and it only allows string keys
