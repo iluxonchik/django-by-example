@@ -1,3 +1,4 @@
+{% load i18n %}
 {% load static %}
 
 <!DOCTYPE html>
@@ -9,19 +10,25 @@
 </head>     
 <body>
     <div id="header">
-        <a href="/" class="logo">My Shop</a>
+        <a href="/" class="logo">{% trans "My Shop" %}</a>
     </div>
     <div id="subheader">
         <div class="cart">
         <div class="cart">
             {% with total_items=cart|length %}
                 {% if total_items > 0 %}
-                    Your cart:
-                    <a href="{% url "cart:cart_detail" %}">{{ total_items }} item{{ total_items|pluralize}}, 
-                        ${{ cart.get_total_price }}
+                    {% trans "Your Cart:" %}
+                        {% comment %}
+                            NOTE: you can't access access expressions or object attributes inside 'blocktrans', 
+                            that's why 'pluralize' was used in the 'with' below. 
+                        {% endcomment %}
+                    <a href="{% url "cart:cart_detail" %}">
+                    {% blocktrans with total_items_plural=total_items|pluralize total_price=cart.get_total_price %}
+                        {{ total_items }} item{{ total_items_plural }}, ${{ total_price }}
+                    {% endblocktrans %}
                     </a>
                 {% else %}
-                    Your cart is empty. 
+                    {% trans "Your cart is empty" %}
                 {% endif %}
             {% endwith %}
         </div>

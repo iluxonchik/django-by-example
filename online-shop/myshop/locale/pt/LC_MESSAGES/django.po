@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-07 11:49+0100\n"
+"POT-Creation-Date: 2016-07-07 12:11+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,19 +18,19 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: cart/forms.py:6
+#: cart/forms.py:7
 msgid "Quantity"
 msgstr "Quantidade"
 
-#: coupons/forms.py:4
+#: coupons/forms.py:5
 msgid "Coupon"
 msgstr "Cupão"
 
-#: myshop/settings.py:134
+#: myshop/settings.py:135
 msgid "English"
 msgstr "Inglês"
 
-#: myshop/settings.py:135
+#: myshop/settings.py:136
 msgid "Portuguese"
 msgstr "Português"
 
@@ -57,3 +57,56 @@ msgstr "código_postal"
 #: orders/models.py:14
 msgid "city"
 msgstr "cidade"
+
+#: orders/templates/orders/order/create.html:5
+#: orders/templates/orders/order/create.html:9
+msgid "Checkout"
+msgstr "Continuar"
+
+#: orders/templates/orders/order/create.html:11
+msgid "Your order"
+msgstr "A sua encomenda"
+
+#: orders/templates/orders/order/create.html:26
+#, python-format
+msgid ""
+"\n"
+"                        \"%(code)s\" (%(discount)s%% off)\n"
+"                    "
+msgstr ""
+"\n"
+"                        \"%(code)s\" (%(discount)s%% de desconto)\n"
+"                    "
+
+#: orders/templates/orders/order/create.html:33
+msgid "Total"
+msgstr "Total"
+
+#: orders/templates/orders/order/create.html:38
+msgid "Place order"
+msgstr "Colocar pedido"
+
+#: shop/templates/shop/base.html:13
+msgid "My Shop"
+msgstr "Minha Loja"
+
+#: shop/templates/shop/base.html:20
+msgid "Your Cart:"
+msgstr "O seu carrinho:"
+
+#: shop/templates/shop/base.html:27
+#, python-format
+msgid ""
+"\n"
+"                        %(total_items)s item%(total_items_plural)s, $"
+"%(total_price)s\n"
+"                    "
+msgstr ""
+"\n"
+"                        %(total_items)s iten%(total_items_plural)s, $"
+"%(total_price)s\n"
+"                    "
+
+#: shop/templates/shop/base.html:32
+msgid "Your cart is empty"
+msgstr "O seu carrinho está vazio"

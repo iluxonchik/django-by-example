@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'orders',
     'payments',
     'coupons',
+    'rosetta',
 ]
 
 MIDDLEWARE_CLASSES = [
