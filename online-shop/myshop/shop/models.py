@@ -3,10 +3,7 @@ from django.core.urlresolvers import reverse
 from parler.models import TranslatableModel, TranslatedFields
 
 class Category(TranslatableModel):
-    name = models.CharField(max_length=200, db_index=True)
-    slug = models.SlugField(max_length=200, db_index=True, unique=True)
-    
-    translations = TranslatedFields(
+    translated = TranslatedFields(
             name = models.CharField(max_length=200, db_index=True),
             slug = models.SlugField(max_length=200, db_index=True, unique=True)
     )
@@ -25,10 +22,6 @@ class Category(TranslatableModel):
         
 
 class Product(TranslatableModel):
-    name = models.CharField(max_length=200, db_index=True)
-    slug = models.SlugField(max_length=200, db_index=True)
-    description = models.TextField(blank=True)
-
     translated = TranslatedFields(
         name = models.CharField(max_length=200, db_index=True),
         slug = models.SlugField(max_length=200, db_index=True),
