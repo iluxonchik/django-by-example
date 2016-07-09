@@ -73,6 +73,7 @@ INSTALLED_APPS = [
     'coupons',
     'rosetta',
     'parler',
+    'localflavor',
 ]
 
 MIDDLEWARE_CLASSES = [
