@@ -9,10 +9,10 @@ class Subject(models.Model):
     slug = models.SlugField(max_length=200, unique=True)
 
     class Meta:
-        ordering =  ('title',)
+        ordering = ('title',)
 
-        def __str__(self):
-            return self.title
+    def __str__(self):
+        return self.title
 
 class Course(models.Model):
     owner = models.ForeignKey(User, related_name='courses_created')
@@ -62,8 +62,8 @@ class ItemBase(models.Model):
     class Meta:
         abstract = True  # this is how we mark a model abstract
 
-        def __str__(self):
-            return self.title
+    def __str__(self):
+        return self.title
 
 class Text(ItemBase):
     content = models.TextField()
