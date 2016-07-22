@@ -43,7 +43,7 @@ class StudentCourseListView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
          # by default returns the value of 'queryset' attribute or (if it's not set) calls '.all()' method on the 'model' attribute default manager
-        qs = super(StudentCourseListView).get_queryset()
+        qs = super(StudentCourseListView, self).get_queryset()
         return qs.filter(students__in=[self.request.user])
 
 class StudentCourseDetailView(DetailView):
