@@ -17,6 +17,8 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from courses.views import CourseListView
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     url(r'^accounts/login/$', auth_views.login, name='login'),
@@ -25,4 +27,4 @@ urlpatterns = [
     url(r'^$', CourseListView.as_view(), name='course_list'),
     url(r'^students/', include('students.urls')),
     url(r'^admin/', admin.site.urls),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
